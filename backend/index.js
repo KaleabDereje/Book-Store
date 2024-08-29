@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 
+import {Port, mongoDB} from "./config.js";
 import router from "./routes/book.route.js";
 
 const app = express();
@@ -20,11 +21,11 @@ app.get('/', (req, res) =>{
 app.use('/books/', router);
 
 
-mongoose.connect("mongodb+srv://kaleabdereje388:md8Sp2.hT-aDa8v@bookstoredb.daijkzq.mongodb.net/?retryWrites=true&w=majority&appName=bookstoredb")
+mongoose.connect(mongoDB)
     .then( ()=>{
         console.log("Connect to mongoDB succesfully!");
-        app.listen(3000, () =>{
-            console.log("running on #3000 port");
+        app.listen(Port, () =>{
+            console.log("running on #8080 port");
         });
     })
     .catch( ()=>{
