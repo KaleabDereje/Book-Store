@@ -72,9 +72,7 @@ export const updateBook = async (req, res) => {
 
         const { id } = req.params;
 
-        const updateBook = await Book.findByIdAndUpdate
-
-            (id, req.body);
+        const updateBook = await Book.findByIdAndUpdate(id, req.body);
 
         if (!updateBook) {
             return res.status(404).json({ message: 'The book does not exist. Check the Id.' });
