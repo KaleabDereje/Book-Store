@@ -18,14 +18,14 @@ app.use(express.urlencoded({ extended: false }));
 // use option 1: Allow origins with default of cors(*)
             //app.use(cors());
        // Option 2: Allow custom origins
-  /*app.use(
+  app.use(
     cors({
-        origin: 'http://localhost:8080',
+        origin: '*',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type'],
     })
   );
-    */
+
 
 app.get('/', (req, res) =>{
     res.send("book store trial");
