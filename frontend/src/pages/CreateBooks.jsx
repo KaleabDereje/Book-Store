@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
-
+import { useSnackbar} from 'notistack';
 
 const CreateBook = () => {
     const [title, setTitle] = useState('');
@@ -11,6 +11,7 @@ const CreateBook = () => {
     const [publishYear, setPublishYear] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
     
     const handleSaveBook = () => {
         const data = {
@@ -23,11 +24,13 @@ const CreateBook = () => {
         axios.post('http://localhost:8080/books', data)
             .then(() => {
                 setLoading(false);
+                enqueueSnackbar("Book Crated Successfully", {variant: 'success'});
                 navigate('/');
             })
             .catch(() =>{
-                console.log(error);
                 setLoading(false);
+                enqueueSnackbar('Error', {variant: 'error'});
+                console.log(error);
             });
     }
 
@@ -47,12 +50,12 @@ const CreateBook = () => {
                      />
                 </div>
                 <div className="my-4">
-                    <label htmlFor="" className="text-xl mr-4 text-gray-500">Author</label>
+                    <label htmlFor="" className="text-xl mr-4 text-gray-500">Title</label>
                     <input type="text"
-                            value={author}
-                            onChnage={(e) => setAuthor(e.target.value)}
-                            className="border rounded-xl border-gray-500 px-4 py-2 w-full"
-                    />
+                           value={author}
+                           onChange={(e) => setAuthor(e.target.value)}
+                           className="border rounded-xl border-gray-500 px-4 py-2 w-full"
+                     />
                 </div>
                 <div className="my">
                     <label htmlFor="" className="text-xl mr-4 text-gray-500">Publish Year</label>
@@ -62,7 +65,7 @@ const CreateBook = () => {
                             className="border rounded-xl border-gray-500 px-4 py-2 w-full"
                     />
                 </div>
-                <button className="p-2 rounded-xl bg-sky-300 m-8" onCLick={handleSaveBook}>
+                <button className="p-2 rounded-xl bg-sky-300 m-8" onClick={handleSaveBook}>
                     Save
                 </button>
             </div>
@@ -70,4 +73,4 @@ const CreateBook = () => {
     );
 }
 
-export default CreateBook;
+export default CreateBook; 
