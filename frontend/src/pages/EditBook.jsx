@@ -11,7 +11,7 @@ const EditBook = () => {
     const [publishYear, setPublishYear] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const enqueueSnack = useSnackbar();
+    const enqueueSnackbar = useSnackbar();
     const { id } = useParams();
     
     useEffect(() => {
@@ -40,12 +40,12 @@ const EditBook = () => {
         axios.put(`http://localhost:8080/books/${id}`, data)
             .then(() => {
                 setLoading(false);
-                enqueueSnack('Updated Successfully', {variant: 'success'});
+                enqueueSnackbar('Updated Successfully', {variant: 'success'});
                 navigate('/');
             })
             .catch((error) =>{
                 setLoading(false);
-                enqueueSnack('Error', {variant: 'error'});
+                enqueueSnackbar('Error', {variant: 'error'});
                 console.log(error);
             });
     }

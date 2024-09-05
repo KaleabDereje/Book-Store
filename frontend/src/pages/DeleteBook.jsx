@@ -9,7 +9,7 @@ const DeleteBook = () => {
 
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const enqueueSnack = useSnackbar();
+    const enqueueSnackbar = useSnackbar();
     const { id } = useParams();
 
 
@@ -19,12 +19,12 @@ const DeleteBook = () => {
         axios.delete(`http://localhost:8080/books/${id}`)
             .then(() =>{
                 setLoading(false);
-                enqueueSnack('Deleted Successfully', {variant: 'success'});
+                enqueueSnackbar('Deleted Successfully', {variant: 'success'});
                 navigate('/');
             })
             .catch((error) => {
                 setLoading(false);
-                enqueueSnack('error', {variant: 'error'});
+                enqueueSnackbar('error', {variant: 'error'});
                 console.log(error);
                 navigate('/');
             });
